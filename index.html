@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Globe</title>
+<!-- hoja estilo-->
+    <style type="text/css">
+            html {height: 100%}
+        body { margin: 0; overflow:hidden; height:100%}
+
+            #viewerDiv {
+                margin : auto auto;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+            }
+            <!-- istancia del contenido al borde de la pagina-->
+            #menuDiv {position: absolute; top:0px; margin-left: 0px;}
+
+
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        <div id="viewerDiv"></div> 
+        <script src="itowns.js"></script>
+        <script type="text/javascript">
+            /* global itowns,document,GuiTools*/
+
+            var positionOnGlobe = { longitude: 2.351323, latitude: 48.856712, altitude: 25000000 };
+
+            // iTowns namespace defined here
+            var viewerDiv = document.getElementById('viewerDiv');
+            var globeView = new itowns.GlobeView(viewerDiv, positionOnGlobe);
+
+            var promises = []
+            promises.push(itowns.Fetcher.json('Ortho.json').then(function(result) { return globeView.addLayer(result); }));
+
+             window.globeView = globeView;
+</script>
+    </body>
+</html>
